@@ -1,4 +1,13 @@
 package config;
 
-public class ProjectConfig {
+import org.aeonbits.owner.Config;
+import org.aeonbits.owner.Config.Sources;
+
+@Sources("classpath:config.properties")
+public interface ProjectConfig extends Config {
+    @Key("url")
+    String url();
 }
+
+
+
