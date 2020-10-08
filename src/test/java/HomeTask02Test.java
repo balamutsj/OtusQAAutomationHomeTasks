@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class HomeTask02Test {
 
-    public static WebDriver driver;
+    protected static WebDriver driver;
     private Logger logger = LogManager.getLogger(HomeTask02Test.class);
     private ProjectConfig cfg = ConfigFactory.create(ProjectConfig.class);
 
@@ -20,6 +20,7 @@ public class HomeTask02Test {
         logger.info("Драйвер поднят");
         logger.info("=====" + testInfo.getDisplayName() + " тест=====");
     }
+
     @Test
     @DisplayName("User is on Otus Main page")
     void isAtOtusPage() {
