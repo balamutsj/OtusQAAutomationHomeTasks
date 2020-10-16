@@ -2,7 +2,7 @@ package webdriverconfig;
 
 public class WebDriverFactory {
 
-    public static DriverManager getDriver(DriverType driverType) {
+    public static DriverManager createDriver(DriverType driverType) {
 
         DriverManager driverManager = null;
 
@@ -10,12 +10,12 @@ public class WebDriverFactory {
             case CHROME:
                 driverManager = new ChromeDriverManager();
                 break;
-            case EDGE:
+            /*case EDGE:
                 driverManager = new MicrosoftEdgeDriverManager();
                 break;
             case FIREFOX:
                 driverManager = new FireFoxDriverManager();
-                break;
+                break;*/
             default:
 
                 break;
