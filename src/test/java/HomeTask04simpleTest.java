@@ -6,9 +6,11 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.util.concurrent.TimeUnit;
+
 public class HomeTask04simpleTest {
 
-    private WebDriver driver;
+    protected static WebDriver driver;
     private Logger logger = LogManager.getLogger(HomeTask04simpleTest.class);
     private ProjectConfig cfg = ConfigFactory.create(ProjectConfig.class);
 
@@ -16,10 +18,11 @@ public class HomeTask04simpleTest {
     @DisplayName("isAtOtusPage")
     void isAtOtusPage(TestInfo testInfo) {
         String expectedPageTitle = "Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям";
-        driver = WebDriverFactory.createDriver(DriverType.CHROME);
-
+        driver = WebDriverFactory.createDriver(BrowserType.firefox);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         logger.info("Драйвер поднят");
         logger.info("=====" + testInfo.getDisplayName() + " тест=====");
+
         driver.get(cfg.url());
         logger.info("Открыта страница отус");
         String currentPageTitle = driver.getTitle();
@@ -34,10 +37,11 @@ public class HomeTask04simpleTest {
         String expectedPageTitle = "Онлайн‑курсы для профессионалов, дистанционное обучение современным профессиям";
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
-        driver = WebDriverFactory.createDriver(DriverType.CHROME, options);
-
+        driver = WebDriverFactory.createDriver(BrowserType.chrome, options);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         logger.info("Драйвер поднят");
         logger.info("=====" + testInfo.getDisplayName() + " тест=====");
+
         driver.get(cfg.url());
         logger.info("Открыта страница отус");
         String currentPageTitle = driver.getTitle();
