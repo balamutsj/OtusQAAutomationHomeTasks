@@ -7,6 +7,12 @@ import org.aeonbits.owner.Config.Sources;
 public interface ProjectConfig extends Config {
     @Key("url")
     String url();
+
+    @Key("user.email")
+    String userEmail();
+
+    @Key("user.password")
+    String userPassword();
 }
 
 
