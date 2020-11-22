@@ -1,13 +1,12 @@
-import config.ProjectConfig;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import webdriverconfig.DriverManager;
+import webdriverconfig.DriverType;
+import webdriverconfig.WebDriverFactory;
 
 public class BaseTest {
 
@@ -16,8 +15,8 @@ public class BaseTest {
 
     @BeforeEach
     public void setUp(TestInfo testInfo) {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        DriverManager driverManager = WebDriverFactory.createDriver(DriverType.CHROME);
+        driver = driverManager.getDriver();
         logger.info("=====" + testInfo.getDisplayName() + " тест=====");
     }
 
