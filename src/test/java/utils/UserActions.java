@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class UserActions {
 
     WebDriver driver;
@@ -40,11 +42,16 @@ public class UserActions {
         return this;
     }
 
-    public UserActions hoverOverElement(WebElement element) {
+    public UserActions hoverOverElement(WebElement locator) {
         Actions action = new Actions(driver);
-        waitElemIsDisplayed(element);
-        action.moveToElement(element).perform();
+        waitElemIsDisplayed(locator);
+        action.moveToElement(locator).perform();
         return this;
+    }
+
+    public String getElementText(WebElement locator) {
+        waitElemIsDisplayed(locator);
+        return locator.getText();
     }
 
     //WAITS
