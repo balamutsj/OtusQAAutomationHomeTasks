@@ -3,6 +3,7 @@ package requests;
 import data.Constants;
 import data.EndPoints;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +16,7 @@ public class CreateUser extends BaseUserApi {
 
     @Setter
     @Getter
+    @NoArgsConstructor
     public static class CreateUserReqBody {
         private Integer id;
         private String username;
@@ -24,10 +26,73 @@ public class CreateUser extends BaseUserApi {
         private String password;
         private String phone;
         private Integer userStatus;
+
+        //public CreateUserReqBody() {}
+
+        public static class Builder {
+            private Integer id;
+            private String username;
+            private String firstName;
+            private String lastName;
+            private String email;
+            private String password;
+            private String phone;
+            private Integer userStatus;
+
+            public Builder() {}
+
+            public Builder id(Integer val) {
+                id = val;
+                return this;
+            }
+            public Builder username(String val) {
+                username = val;
+                return this;
+            }
+            public Builder firstName(String val) {
+                firstName = val;
+                return this;
+            }
+            public Builder lastName(String val) {
+                lastName = val;
+                return this;
+            }
+            public Builder email(String val) {
+                email = val;
+                return this;
+            }
+            public Builder password(String val) {
+                password = val;
+                return this;
+            }
+            public Builder phone(String val) {
+                phone = val;
+                return this;
+            }
+            public Builder userStatus(Integer val) {
+                userStatus = val;
+                return this;
+            }
+            public CreateUser.CreateUserReqBody build() {
+                return new CreateUser.CreateUserReqBody(this);
+            }
+        }
+
+        private CreateUserReqBody(Builder builder) {
+            id = builder.id;
+            username = builder.username;
+            firstName = builder.firstName;
+            lastName = builder.lastName;
+            email = builder.email;
+            password = builder.password;
+            phone = builder.phone;
+            userStatus = builder.userStatus;
+        }
     }
 
     @Setter
     @Getter
+    @NoArgsConstructor
     public static class CreateUserRespBody {
         private int code;
         private String type;
@@ -58,11 +123,12 @@ public class CreateUser extends BaseUserApi {
         logger.info(Constants.reqBodyField + createUserReqBody.phone);
         logger.info(Constants.reqBodyField + createUserReqBody.userStatus);
         return with().spec(Specs.commonRequestSpec)
-                        .body(gson.toJson(createUserReqBody, CreateUserReqBody.class))
+                        .body(createUserReqBody)
                         .when()
                         .request("POST", baseUrl + EndPoints.createUserPath)
                         .then()
                         .statusCode(200)
+                        .log().all()
                         .extract()
                         .as(CreateUserRespBody.class);
     }

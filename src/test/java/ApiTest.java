@@ -47,14 +47,45 @@ public class ApiTest extends BaseTest{
         Assertions.assertEquals(reqBody.getId(), respBody.getId());
     }
 
-    /*
-    * Тест-кейс
-    * 1. Отправить запрос на получение несуществующего юзера
-    * Проверить: что пользователя не существует
-    * */
     @Test
     void getNotExistingUser() {
+        /*
+         * Тест-кейс
+         * 1. Отправить запрос на получение несуществующего юзера
+         * Проверить: что пользователя не существует
+         * */
         GetUser.GetUserErrRespBody respBody = GetUser.sendRequest("someStrangeNotExistingUserName", GetUser.GetUserErrRespBody.class, 404);
         Assertions.assertEquals(respBody.getMessage(), "User not found");
+    }
+
+    @Test
+    void createUserOnlyWithId() {
+        /*
+         * 1. Отправить запрос на создание юзера только с полем id
+         * Проверить: тело ответа содержит статус-код 200, тип: неизвестный, сообщение не пустое
+         * */
+        CreateUser.CreateUserReqBody reqBody = new CreateUser.CreateUserReqBody.Builder()
+                .id(faker.number().numberBetween(1000000, 200000000))
+                .build();
+        CreateUser.CreateUserRespBody respBody = CreateUser.sendRequest(reqBody);
+        Assertions.assertEquals(respBody.getCode(), 200);
+        Assertions.assertEquals(respBody.getType(), "unknown");
+        Assertions.assertNotNull(respBody.getMessage());
+    }
+
+    @Test
+    void createUserWithIdAndUserName() {
+        /*
+         * 1. Отправить запрос на создание юзера с полем id  и полем
+         * Проверить: тело ответа содержит статус-код 200, тип: неизвестный, сообщение не пустое
+         * */
+        CreateUser.CreateUserReqBody reqBody = new CreateUser.CreateUserReqBody.Builder()
+                .id(faker.number().numberBetween(1000000, 200000000))
+                .username(faker.name().username())
+                .build();
+        CreateUser.CreateUserRespBody respBody = CreateUser.sendRequest(reqBody);
+        Assertions.assertEquals(respBody.getCode(), 200);
+        Assertions.assertEquals(respBody.getType(), "unknown");
+        Assertions.assertNotNull(respBody.getMessage());
     }
 }

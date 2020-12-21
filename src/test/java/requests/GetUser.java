@@ -2,7 +2,6 @@ package requests;
 
 import data.Constants;
 import data.EndPoints;
-import io.restassured.http.Header;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
@@ -50,6 +49,7 @@ public class GetUser extends BaseUserApi {
                 .request("GET", baseUrl + EndPoints.getUserPath)
                 .then()
                 .statusCode(responseStatusCode)
+                .log().all()
                 .extract()
                 .as(responseClass);
     }
