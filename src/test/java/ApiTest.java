@@ -23,8 +23,8 @@ public class ApiTest extends BaseTest{
     void createUserError() {
         /*
          * Тест-кейс
-         * 1. Отправить запрос на создание юзера
-         * Проверить: тело ответа содержит статус-код 200, тип: неизвестный, сообщение не пустое
+         * 1. Отправить запрос на создание юзера с пустым телом
+         * Проверить: тело ответа содержит статус-код 200, тип: неизвестный, сообщение равно 0
          * */
         CreateUser.CreateUserReqBody reqBody = new CreateUser.CreateUserReqBody();
         CreateUser.CreateUserRespBody respBody = CreateUser.sendRequest(reqBody);
