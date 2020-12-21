@@ -5,8 +5,8 @@ import org.aeonbits.owner.Config.Sources;
 
 @Sources("classpath:config.properties")
 public interface ProjectConfig extends Config {
-    @Key("url")
-    String url();
+    @Key("baseUrl")
+    String baseUrl();
 }
 
 
