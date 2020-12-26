@@ -9,7 +9,7 @@ import data.EndPoints;
 import java.util.Locale;
 
 public class BaseUserApi {
-    protected static Gson gson = new Gson();
+
     protected static String baseUrl = EndPoints.basePath;
     protected static Faker faker = new Faker(new Locale("en-GB"));
     protected static FakeValuesService fakeValuesService = new FakeValuesService(

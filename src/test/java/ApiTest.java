@@ -3,6 +3,9 @@ import org.junit.jupiter.api.Test;
 import requests.CreateUser;
 import requests.GetUser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class ApiTest extends BaseTest{
 
     @Test
@@ -14,9 +17,11 @@ public class ApiTest extends BaseTest{
         * */
         CreateUser.CreateUserReqBody reqBody = CreateUser.generateModel();
         CreateUser.CreateUserRespBody respBody = CreateUser.sendRequest(reqBody);
-        Assertions.assertEquals(respBody.getCode(), 200);
-        Assertions.assertEquals(respBody.getType(), "unknown");
-        Assertions.assertNotNull(respBody.getMessage());
+        Assertions.assertAll(
+                () -> assertEquals(respBody.getCode(), 200),
+                () -> assertEquals(respBody.getType(), "unknown"),
+                () -> assertNotNull(respBody.getMessage())
+        );
     }
 
     @Test
@@ -28,9 +33,11 @@ public class ApiTest extends BaseTest{
          * */
         CreateUser.CreateUserReqBody reqBody = new CreateUser.CreateUserReqBody();
         CreateUser.CreateUserRespBody respBody = CreateUser.sendRequest(reqBody);
-        Assertions.assertEquals(respBody.getCode(), 200);
-        Assertions.assertEquals(respBody.getType(), "unknown");
-        Assertions.assertEquals(respBody.getMessage(), "0");
+        Assertions.assertAll(
+                () -> assertEquals(respBody.getCode(), 200),
+                () -> assertEquals(respBody.getType(), "unknown"),
+                () -> assertNotNull(respBody.getMessage(), "0")
+        );
     }
 
     @Test
@@ -44,7 +51,7 @@ public class ApiTest extends BaseTest{
         CreateUser.CreateUserReqBody reqBody = CreateUser.generateModel();
         CreateUser.sendRequest(reqBody);
         GetUser.GetUserRespBody respBody = GetUser.sendRequest(reqBody.getUsername(), GetUser.GetUserRespBody.class);
-        Assertions.assertEquals(reqBody.getId(), respBody.getId());
+        assertEquals(reqBody.getId(), respBody.getId());
     }
 
     @Test
@@ -55,7 +62,7 @@ public class ApiTest extends BaseTest{
          * Проверить: что пользователя не существует
          * */
         GetUser.GetUserErrRespBody respBody = GetUser.sendRequest("someStrangeNotExistingUserName", GetUser.GetUserErrRespBody.class, 404);
-        Assertions.assertEquals(respBody.getMessage(), "User not found");
+        assertEquals(respBody.getMessage(), "User not found");
     }
 
     @Test
@@ -68,9 +75,11 @@ public class ApiTest extends BaseTest{
                 .id(faker.number().numberBetween(1000000, 200000000))
                 .build();
         CreateUser.CreateUserRespBody respBody = CreateUser.sendRequest(reqBody);
-        Assertions.assertEquals(respBody.getCode(), 200);
-        Assertions.assertEquals(respBody.getType(), "unknown");
-        Assertions.assertNotNull(respBody.getMessage());
+        Assertions.assertAll(
+                () -> assertEquals(respBody.getCode(), 200),
+                () -> assertEquals(respBody.getType(), "unknown"),
+                () -> assertNotNull(respBody.getMessage())
+        );
     }
 
     @Test
@@ -84,8 +93,10 @@ public class ApiTest extends BaseTest{
                 .username(faker.name().username())
                 .build();
         CreateUser.CreateUserRespBody respBody = CreateUser.sendRequest(reqBody);
-        Assertions.assertEquals(respBody.getCode(), 200);
-        Assertions.assertEquals(respBody.getType(), "unknown");
-        Assertions.assertNotNull(respBody.getMessage());
+        Assertions.assertAll(
+                () -> assertEquals(respBody.getCode(), 200),
+                () -> assertEquals(respBody.getType(), "unknown"),
+                () -> assertNotNull(respBody.getMessage())
+        );
     }
 }

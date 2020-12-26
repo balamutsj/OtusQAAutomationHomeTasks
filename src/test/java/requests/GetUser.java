@@ -1,6 +1,5 @@
 package requests;
 
-import data.Constants;
 import data.EndPoints;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,7 +34,6 @@ public class GetUser extends BaseUserApi {
     }
 
     public static <T> T sendRequest(String username, Class<T> responseClass, int... statusCode) {
-        logger.info(Constants.req_url + baseUrl + EndPoints.getUserPath);
         int responseStatusCode;
         if(statusCode.length > 0) {
             responseStatusCode = statusCode[0];
@@ -46,6 +44,7 @@ public class GetUser extends BaseUserApi {
                 .spec(Specs.commonRequestSpec)
                 .pathParam("username", username)
                 .when()
+                .log().all()
                 .request("GET", baseUrl + EndPoints.getUserPath)
                 .then()
                 .statusCode(responseStatusCode)

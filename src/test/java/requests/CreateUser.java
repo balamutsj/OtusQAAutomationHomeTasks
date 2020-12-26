@@ -1,6 +1,5 @@
 package requests;
 
-import data.Constants;
 import data.EndPoints;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -113,7 +112,7 @@ public class CreateUser extends BaseUserApi {
     }
 
     public static CreateUserRespBody sendRequest(CreateUserReqBody createUserReqBody) {
-        logger.info(Constants.req_url + baseUrl + EndPoints.createUserPath);
+        /*logger.info(Constants.req_url + baseUrl + EndPoints.createUserPath);
         logger.info(Constants.reqBodyField + createUserReqBody.id);
         logger.info(Constants.reqBodyField + createUserReqBody.username);
         logger.info(Constants.reqBodyField + createUserReqBody.firstName);
@@ -121,10 +120,11 @@ public class CreateUser extends BaseUserApi {
         logger.info(Constants.reqBodyField + createUserReqBody.email);
         logger.info(Constants.reqBodyField + createUserReqBody.password);
         logger.info(Constants.reqBodyField + createUserReqBody.phone);
-        logger.info(Constants.reqBodyField + createUserReqBody.userStatus);
+        logger.info(Constants.reqBodyField + createUserReqBody.userStatus);*/
         return with().spec(Specs.commonRequestSpec)
                         .body(createUserReqBody)
                         .when()
+                        .log().all()
                         .request("POST", baseUrl + EndPoints.createUserPath)
                         .then()
                         .statusCode(200)
