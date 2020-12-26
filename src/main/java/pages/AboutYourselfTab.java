@@ -1,7 +1,8 @@
 package pages;
 
-import Models.AboutYourselfModel;
+import models.AboutYourselfModel;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -55,66 +56,67 @@ public class AboutYourselfTab extends BasePage{
     Faker fakerRu = new Faker(new Locale("ru-RU"));
     Faker fakerEn = new Faker(new Locale("en-GB"));
 
+    @Step()
     public AboutYourselfTab isAtAboutYourselfTab() {
         action.isAt(personalDataTabTitle);
         logger.info("На странице Личный кабинет: О себе");
         return this;
     }
-
+    @Step()
     public AboutYourselfTab fillFirstNameField(String... name) {
         action.typeText(firstNameInput, action.setDefaultValue(fakerRu.name().firstName(), name));
         logger.info("Поле Имя заполнено");
         return this;
     }
-
+    @Step()
     public AboutYourselfTab fillFirstNameLatinField(String... name) {
         action.typeText(firstNameLatinInput, action.setDefaultValue(fakerEn.name().firstName(), name));
         logger.info("Поле Имя(Latin) заполнено");
         return this;
     }
-
+    @Step()
     public AboutYourselfTab fillLastNameField(String... name) {
         action.typeText(lastNameInput, action.setDefaultValue(fakerRu.name().lastName(), name));
         logger.info("Поле Фамилия заполнено");
         return this;
     }
-
+    @Step()
     public AboutYourselfTab fillLastNameLatinField(String... name) {
         action.typeText(lastNameLatinInput, action.setDefaultValue(fakerEn.name().lastName(), name));
         logger.info("Поле Фамилия(Latin) заполнено");
         return this;
     }
-
+    @Step()
     public AboutYourselfTab fillBlogNameLatinField(String... name) {
         action.typeText(blogNameInput, action.setDefaultValue(fakerEn.name().username(), name));
         logger.info("Поле Имя в блоге заполнено");
         return this;
     }
-
+    @Step()
     public AboutYourselfTab fillDateOfBirthField(String... dateOfBirth) {
         action.typeText(birthDateInput, action.setDefaultValue(fakerEn.date().birthday().toString(), dateOfBirth));//TODO здесь пока костыль, нужно придумать творческий подход к выводу даты рождения
         logger.info("Поле Дата рождения заполнено");
         return this;
     }
-
+    @Step()
     public AboutYourselfTab setCountry(String name) {
         commonInfoSpecificDropDown(countrySelect, "Страна", "country", name);
         logger.info("Поле Страна заполнено");
         return this;
     }
-
+    @Step()
     public AboutYourselfTab setCity(String name) {
         commonInfoSpecificDropDown(citySelect, "Город", "city", name);
         logger.info("Поле Город заполнено");
         return this;
     }
-
+    @Step()
     public AboutYourselfTab setEnglishLevel(String name) {
         commonInfoSpecificDropDown(englishLevelSelect, "Уровень английского", "english_level", name);
         logger.info("Поле Уровень английского заполнено");
         return this;
     }
-
+    @Step()
     //Пока методы заполнения контактов в таком формате, если руки доберуться придумаю более изящный вариант +
     // оказываются контакты после перезагрузки страницы сортируются по алфабиту, так что пока в тесте данные способов оплаты стоят в алфавитном порядке
     public AboutYourselfTab setFirstContact(String contactType, String contactName) {
@@ -125,7 +127,7 @@ public class AboutYourselfTab extends BasePage{
             .typeText(driver.findElement(By.xpath("//input[@name='contact-0-value']")), contactName);
         return this;
     }
-
+    @Step()
     public AboutYourselfTab setSecondContact(String contactType, String contactName) {
         String wayOfComm = customGetInTouchSelect(0).getText();
         if(!wayOfComm.contains("Способ")) {
@@ -138,13 +140,13 @@ public class AboutYourselfTab extends BasePage{
             .typeText(driver.findElement(By.xpath("//input[@name='contact-1-value']")), contactName);
         return this;
     }
-
+    @Step()
     public PersonalAreaPage saveAndContinue() {
         action.clickOnVisibleElement(savaAndContinueButton);
         logger.info("Поле Уровень английского заполнено");
         return new PersonalAreaPage(driver);
     }
-
+    @Step()
     public AboutYourselfModel getFormData() { //TODO методы сбора данных обернуть в try\catch
         AboutYourselfModel model = new AboutYourselfModel();
         model.setUserFirstNameRu(getFiledAttrValue(firstNameInput));

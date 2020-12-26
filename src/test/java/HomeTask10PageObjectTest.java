@@ -1,13 +1,14 @@
-import Models.AboutYourselfModel;
+import models.AboutYourselfModel;
 import com.github.javafaker.Faker;
 import config.ProjectConfig;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
@@ -15,15 +16,19 @@ import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HomeTask10PageObjectTest {
 
-    protected WebDriver driver;
+@Epic("The Epic from JIRA: 'user personal data'")
+@Story("Here goes some story link: http://jiraticket123478.jira.com")
+public class HomeTask10PageObjectTest extends BaseTest{
+
     private Logger logger = LogManager.getLogger(HomeTask10PageObjectTest.class);
     private ProjectConfig cfg = ConfigFactory.create(ProjectConfig.class);
 
     @Test
-    void otusUserInfoTest() throws InterruptedException {
-        //Prepare
+    @Step("Test: 'otusUserInfoTest'")
+    @Description("The first and last test case in this class")
+    void otusUserInfoTest() {
+        //Arrange
         Faker fakerRu = new Faker(new Locale("ru-RU"));
         Faker fakerEn = new Faker(new Locale("en-GB"));
         MainPage mainPage = new MainPage(driver);
@@ -82,21 +87,7 @@ public class HomeTask10PageObjectTest {
         assertThat(expData).isEqualToComparingFieldByField(currentData);
     }
 
-    @BeforeEach
-    private void setUp(TestInfo testInfo) {
-        driver = WebDriverFactory.createDriver(BrowserType.chrome);
-        logger.info("Драйвер поднят");
-        logger.info("=====" + testInfo.getDisplayName() + " тест=====");
-    }
-
-    @AfterEach
-    private void setDown() {
-        logger.info("=====тест завершился=====");
-        if (driver != null) {
-            driver.quit();
-        }
-    }
-
+    @Step("Browser cookies clear-up")
     private void clearUpCookies(WebDriver driver) {
         driver.manage().deleteAllCookies();
         logger.info("=====ПеченькО съедено :(( =====");

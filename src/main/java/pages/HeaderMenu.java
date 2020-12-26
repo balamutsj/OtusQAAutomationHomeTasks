@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +20,7 @@ public class HeaderMenu extends BasePage{
 
     private final Logger logger = LogManager.getLogger(HeaderMenu.class);
 
+    @Step()
     public PersonalAreaPage goToPersonalArea() {
         action.hoverOverElement(userMenuMainItem).clickOnVisibleElement(userMenuPersonalAreaItem);
         logger.info("Пункт меню 'личный кабинет' нажат");

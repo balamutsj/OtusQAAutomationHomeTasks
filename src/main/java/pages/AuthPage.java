@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -23,12 +24,14 @@ public class AuthPage extends BasePage{
 
     private final Logger logger = LogManager.getLogger(AuthPage.class);
 
+    @Step()
     public AuthPage isAtAuthPage() {
         action.isAt(authPageLoginTitle);
         logger.info("На странице аутентификации");
         return this;
     }
 
+    @Step()
     public AuthPage fillEmailField() {
         String login = null;
         String actualLogin;
@@ -47,6 +50,7 @@ public class AuthPage extends BasePage{
         return this;
     }
 
+    @Step()
     public AuthPage fillPasswordField() {
         String password = null;
         String actualPassword;
@@ -65,6 +69,7 @@ public class AuthPage extends BasePage{
         return this;
     }
 
+    @Step()
     public MainPage clickLogInButton() {
         action.clickOnVisibleElement(authPageLoginBtn);
         logger.info("Кнопка 'Войти' нажата");
