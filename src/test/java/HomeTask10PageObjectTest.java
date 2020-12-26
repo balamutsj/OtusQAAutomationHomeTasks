@@ -35,7 +35,7 @@ public class HomeTask10PageObjectTest extends BaseTest{
         AuthPage authPage = new AuthPage(driver);
         HeaderMenu headerMenu = new HeaderMenu(driver);
         PersonalAreaPage personalAreaPage = new PersonalAreaPage(driver);
-        AboutYourselfTab aboutYourselfTab = new AboutYourselfTab(driver); //TODO research on PODAM library
+        AboutYourselfTab aboutYourselfTab = new AboutYourselfTab(driver);
         AboutYourselfModel expData = new AboutYourselfModel();
         expData.setUserFirstNameRu(fakerRu.name().firstName());
         expData.setUserLastNameRu(fakerRu.name().lastName());
