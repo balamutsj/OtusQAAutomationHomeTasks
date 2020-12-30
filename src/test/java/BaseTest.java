@@ -5,10 +5,14 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
+import java.net.MalformedURLException;
+@Execution(ExecutionMode.CONCURRENT)
 public class BaseTest {
 
     protected WebDriver driver;
@@ -16,7 +20,7 @@ public class BaseTest {
 
     @Step("Chrome driver setup")
     @BeforeEach
-    private void setUp(TestInfo testInfo) {
+    private void setUp(TestInfo testInfo) throws MalformedURLException {
         driver = WebDriverFactory.createDriver(BrowserType.chrome);
         logger.info("Драйвер поднят");
         logger.info("=====" + testInfo.getDisplayName() + " тест=====");

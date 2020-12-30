@@ -56,19 +56,19 @@ public class UserActions {
     }
 
     public UserActions waitElemIsNotDisplayed(WebElement locator) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.invisibilityOf(locator));
         return this;
     }
 
     public UserActions waitElemToBeClickable(WebElement locator) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(locator));
         return this;
     }
 
     private void waitFor(ExpectedCondition<WebElement> condition, Integer timeout) {
-        timeout = timeout != null ? timeout : 10;
+        timeout = timeout != null ? timeout : 20;
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         wait.until(condition);
     }
