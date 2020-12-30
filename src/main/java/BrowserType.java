@@ -1,4 +1,5 @@
 public enum BrowserType {
+    remote("remote"),
     chrome("chrome"),
     firefox("firefox");
 

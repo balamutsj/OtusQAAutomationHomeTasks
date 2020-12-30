@@ -1,7 +1,9 @@
 # IntelliJ
 out/
 .idea
-
+.allure
+/*/allure-results/
+*-result.json
 # Log file
 *.log
 
