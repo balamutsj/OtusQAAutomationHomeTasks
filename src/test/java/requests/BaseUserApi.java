@@ -3,7 +3,6 @@ package requests;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
-import com.google.gson.Gson;
 import data.EndPoints;
 
 import java.util.Locale;
